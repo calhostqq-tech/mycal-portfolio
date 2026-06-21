@@ -564,6 +564,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 </script>
 <script type="module">
 import*as THREE from'/three.module.min.js';
+// Always start at the top so galaxy shows first, not MYCAL
+if(history.scrollRestoration)history.scrollRestoration='manual';
+window.scrollTo(0,0);
 const c=document.getElementById('particles');
 if(!c)throw'no canvas';
 
@@ -632,7 +635,7 @@ const morphTarget={v:0},morphCurrent={v:0},prevSmooth={v:-1};
 window.addEventListener('scroll',()=>{
   const hero=document.getElementById('home');
   if(!hero)return;
-  const scrollable=hero.offsetHeight-window.innerHeight; // = 100vh
+  const scrollable=Math.max(1,hero.offsetHeight-window.innerHeight);
   morphTarget.v=Math.max(0,Math.min(1,window.scrollY/scrollable));
 },{passive:true});
 
