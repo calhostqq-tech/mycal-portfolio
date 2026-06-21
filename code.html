@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="en"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>MYCAL AI - Portfolio</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700;800&amp;family=Geist:wght@400;500;600&amp;family=JetBrains+Mono:wght@400;500;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<style type="text/tailwindcss">
+        @layer utilities {
+            .glass-panel {
+                @apply bg-[#0a0a0a]/40 backdrop-blur-[40px] border border-white/10;
+                background-image: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(255,255,255,0) 100%);
+            }
+            .glass-panel-hover {
+                @apply hover:border-surface-tint/30 transition-all duration-500 hover:shadow-[0_0_100px_rgba(0,219,231,0.1)];
+            }
+            .text-gradient {
+                @apply bg-clip-text text-transparent bg-gradient-to-r from-surface-tint to-secondary-fixed;
+            }
+            .glow-line {
+                @apply h-[2px] bg-surface-tint shadow-[0_0_10px_rgba(0,219,231,0.8)];
+            }
+        }
+    </style>
+<script id="tailwind-config">
+        tailwind.config = {
+            darkMode: "class",
+            theme: {
+                extend: {
+                    colors: {
+                        "surface-container-highest": "#353434",
+                        "surface-container-low": "#1c1b1b",
+                        "surface-tint": "#00dbe7",
+                        "on-tertiary-fixed-variant": "#454747",
+                        "on-secondary-fixed-variant": "#5516be",
+                        "inverse-surface": "#e5e2e1",
+                        "surface-bright": "#3a3939",
+                        "on-secondary": "#3c0091",
+                        "on-tertiary-fixed": "#1a1c1c",
+                        "surface-variant": "#353434",
+                        "on-tertiary": "#2f3131",
+                        "primary-container": "#00f2ff",
+                        "on-primary-container": "#006a71",
+                        "primary": "#e1fdff",
+                        "tertiary-fixed": "#e2e2e2",
+                        "primary-fixed-dim": "#00dbe7",
+                        "surface-container-lowest": "#0e0e0e",
+                        "tertiary-fixed-dim": "#c6c6c7",
+                        "surface-dim": "#141313",
+                        "surface-container-high": "#2a2a2a",
+                        "on-primary-fixed-variant": "#004f54",
+                        "inverse-on-surface": "#313030",
+                        "on-primary": "#00363a",
+                        "on-error": "#690005",
+                        "primary-fixed": "#74f5ff",
+                        "outline-variant": "#3a494b",
+                        "secondary-fixed": "#e9ddff",
+                        "error": "#ffb4ab",
+                        "secondary-fixed-dim": "#d0bcff",
+                        "error-container": "#93000a",
+                        "on-error-container": "#ffdad6",
+                        "inverse-primary": "#00696f",
+                        "on-tertiary-container": "#5e6060",
+                        "outline": "#849495",
+                        "secondary-container": "#571bc1",
+                        "surface": "#141313",
+                        "on-surface-variant": "#b9cacb",
+                        "on-secondary-container": "#c4abff",
+                        "tertiary-container": "#dbdbdb",
+                        "on-surface": "#e5e2e1",
+                        "on-secondary-fixed": "#23005c",
+                        "tertiary": "#f7f8f8",
+                        "on-background": "#e5e2e1",
+                        "secondary": "#d0bcff",
+                        "background": "#141313",
+                        "surface-container": "#201f1f",
+                        "on-primary-fixed": "#002022"
+                    },
+                    borderRadius: {
+                        "DEFAULT": "0.25rem",
+                        "lg": "0.5rem",
+                        "xl": "0.75rem",
+                        "full": "9999px"
+                    },
+                    spacing: {
+                        "gutter": "24px",
+                        "unit": "8px",
+                        "stack-sm": "16px",
+                        "stack-lg": "64px",
+                        "stack-md": "32px",
+                        "margin-mobile": "20px",
+                        "container-max": "1200px"
+                    },
+                    fontFamily: {
+                        "label-mono": ["JetBrains Mono", "monospace"],
+                        "headline-md": ["Sora", "sans-serif"],
+                        "display-lg-mobile": ["Sora", "sans-serif"],
+                        "display-lg": ["Sora", "sans-serif"],
+                        "body-lg": ["Geist", "sans-serif"],
+                        "display-2xl": ["Sora", "sans-serif"],
+                        "body-md": ["Geist", "sans-serif"]
+                    },
+                    fontSize: {
+                        "label-mono": ["13px", { lineHeight: "1", letterSpacing: "0.05em", fontWeight: "500" }],
+                        "headline-md": ["24px", { lineHeight: "1.4", letterSpacing: "-0.01em", fontWeight: "600" }],
+                        "display-lg-mobile": ["32px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "display-lg": ["48px", { lineHeight: "1.2", letterSpacing: "-0.02em", fontWeight: "700" }],
+                        "body-lg": ["18px", { lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400" }],
+                        "display-2xl": ["72px", { lineHeight: "1.1", letterSpacing: "-0.04em", fontWeight: "800" }],
+                        "body-md": ["16px", { lineHeight: "1.6", letterSpacing: "0em", fontWeight: "400" }]
+                    }
+                }
+            }
+        }
+    </script>
+<style>
+        body {
+            background-color: #020202;
+            color: #e5e2e1;
+            scroll-behavior: smooth;
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 4px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #020202;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #353434;
+            border-radius: 4px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #00dbe7;
+        }
+        /* Radial Orbs */
+        .radial-orb-cyan {
+            position: fixed;
+            width: 60vw;
+            height: 60vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(0,219,231,0.15) 0%, rgba(0,0,0,0) 70%);
+            top: -20vh;
+            left: -20vw;
+            z-index: -1;
+            pointer-events: none;
+        }
+        .radial-orb-violet {
+            position: fixed;
+            width: 50vw;
+            height: 50vw;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(87,27,193,0.15) 0%, rgba(0,0,0,0) 70%);
+            bottom: -10vh;
+            right: -10vw;
+            z-index: -1;
+            pointer-events: none;
+        }
+    </style>
+</head>
+<body class="antialiased overflow-x-hidden relative">
+<!-- Ambient Backgrounds -->
+<div class="radial-orb-cyan"></div>
+<div class="radial-orb-violet"></div>
+<!-- Top Navigation -->
+<nav class="bg-surface/40 backdrop-blur-[40px] fixed top-4 left-1/2 -translate-x-1/2 w-[calc(100%-40px)] max-w-container-max rounded-xl border border-white/10 shadow-[0_0_100px_rgba(0,219,231,0.1)] z-50 flex justify-between items-center px-gutter py-unit transition-all duration-300">
+<div class="flex items-center gap-2">
+<span class="material-symbols-outlined text-primary-fixed-dim" style="font-variation-settings: 'FILL' 1;">memory</span>
+<span class="font-label-mono text-label-mono tracking-widest text-primary-fixed-dim">MYCAL AI</span>
+</div>
+<div class="hidden md:flex gap-6 items-center">
+<a class="text-primary-fixed-dim font-bold font-label-mono text-label-mono hover:bg-primary-container/10 px-3 py-2 rounded transition-all duration-300" href="#home">Home</a>
+<a class="text-on-surface-variant font-label-mono text-label-mono hover:bg-primary-container/10 px-3 py-2 rounded transition-all duration-300" href="#projects">Projects</a>
+<a class="text-on-surface-variant font-label-mono text-label-mono hover:bg-primary-container/10 px-3 py-2 rounded transition-all duration-300" href="#skills">Skills</a>
+<a class="text-on-surface-variant font-label-mono text-label-mono hover:bg-primary-container/10 px-3 py-2 rounded transition-all duration-300" href="#experience">Experience</a>
+<a class="text-on-surface-variant font-label-mono text-label-mono hover:bg-primary-container/10 px-3 py-2 rounded transition-all duration-300" href="#contact">Contact</a>
+</div>
+<button class="bg-gradient-to-r from-primary-fixed-dim to-secondary-container text-white px-6 py-2 rounded-lg font-label-mono text-label-mono hover:scale-95 transition-transform duration-200">
+            Hire Me
+        </button>
+</nav>
+<!-- Hero Section -->
+<section class="min-h-screen flex items-center justify-center pt-24 px-margin-mobile relative overflow-hidden" id="home">
+<div class="max-w-container-max w-full grid grid-cols-1 md:grid-cols-2 gap-gutter relative z-10">
+<div class="flex flex-col justify-center space-y-8 z-20">
+<h1 class="font-display-lg-mobile md:font-display-2xl text-on-surface">
+                    AI Engineer,<br/>
+                    Automation<br/>
+                    Developer, Full<br/>
+                    Stack Builder
+                </h1>
+<p class="font-body-lg text-on-surface-variant max-w-xl">
+                    Building the Future with Intelligent Automation and Creative Code. Explore my work at the intersection of AI and design.
+                </p>
+<div class="flex flex-wrap gap-4 pt-4">
+<a class="bg-gradient-to-r from-primary-fixed-dim to-secondary-container text-white px-8 py-3 rounded-lg font-label-mono text-label-mono hover:scale-95 transition-transform duration-200 inline-block text-center" href="#projects">
+                        View Projects
+                    </a>
+<a class="glass-panel border-surface-tint text-surface-tint px-8 py-3 rounded-lg font-label-mono text-label-mono hover:bg-surface-tint/10 transition-colors duration-200 inline-block text-center" href="#contact">
+                        Contact Me
+                    </a>
+</div>
+</div>
+<div class="relative h-[50vh] md:h-auto min-h-[400px] flex items-center justify-center z-10">
+<!-- Placeholder for 3D Core - usually a WebGL shader or ThreeJS scene would go here. We'll use a placeholder div that mimics the structure for now. -->
+<div class="absolute inset-0 w-full h-full glass-panel rounded-full blur-[100px] opacity-20"></div>
+<div class="w-full h-full absolute inset-0 flex items-center justify-center">
+<span class="material-symbols-outlined text-[200px] text-surface-tint opacity-50 blur-[2px]">hub</span>
+</div>
+</div>
+</div>
+</section>
+<!-- Projects Section -->
+<section class="py-stack-lg px-margin-mobile relative" id="projects">
+<div class="max-w-container-max mx-auto space-y-stack-md">
+<div class="text-center space-y-4">
+<h2 class="font-display-lg text-gradient">Projects</h2>
+<p class="font-body-lg text-on-surface-variant">Featured Grid</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Project Card 1 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-unit flex flex-col group">
+<div class="h-48 bg-surface-container-high rounded-lg mb-4 overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A dark mode UI screenshot showing an N8N automation workflow node graph with various tool icons connected by lines." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuAvZcWnx7PJT73p9nwscRNdCXRpGM_P2uf-IBp9_HhZYotTk5IKaliRaRKmk1onMz0FVxR4QSA4yXoEgpR1wBYesWpSBd5BDDd6bb7K8pVqfj390M9G_gZ_txQEfWM3vu2e2m4By9zuMdLTsB0nf77pz6sM6_jeXCxyljYn3FOiQ61h7ks0-_-FvA9wZYePwHmAuDee952f2nNM-rRjUeGof_RJhklLNMKwLyAoWMiTdSYHLh0fBPFfYdsNCDTq4d4v-Sv1s-OhIGNi')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-on-surface mb-2">N8N Automation System</h3>
+<p class="font-body-md text-on-surface-variant mb-6 flex-grow">Automate workflow bisnis dengan n8n.</p>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">n8n</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">OpenAI</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">Google Sheets</span>
+</div>
+</div>
+</div>
+<!-- Project Card 2 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-unit flex flex-col group">
+<div class="h-48 bg-surface-container-high rounded-lg mb-4 overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A dark mode UI dashboard showing AI agent status, chat interface, and analytics charts with blue and purple accents." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuC5lbQFxHmOv2RM3oBiozs09b_qWIMKxAAD3vVqel23Tug1ZXB-xEHJSGR1nlt9WJgP6s1Gl70xUcoR6CT0E75P_F8ojhkaEQ-0FTpoB2fBMztFTogWZQtyQ2L8PTApIO2c0GEHMkpCuz_8cCIkB5-vzlcrf_q0UMe9Y-Hcgjl8c1XI7RDAA0XV47f9jTV8C0u8kd5GVnzmhbYwSqHDlofpoCfNL3Izl_VthmNkPxTHH7WOnQZapSm0qHjAwc8C2Pep8F4dipbEyRtk')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-on-surface mb-2">AI Agent System</h3>
+<p class="font-body-md text-on-surface-variant mb-6 flex-grow">Sistem AI Agent cerdas untuk otomatisasi &amp; asistensi.</p>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-secondary-fixed text-[10px]">React</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-secondary-fixed text-[10px]">OpenAI</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-secondary-fixed text-[10px]">Data Analyst</span>
+</div>
+</div>
+</div>
+<!-- Project Card 3 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-unit flex flex-col group">
+<div class="h-48 bg-surface-container-high rounded-lg mb-4 overflow-hidden relative">
+<div class="w-full h-full bg-cover bg-center transition-transform duration-700 group-hover:scale-105" data-alt="A dark mode analytics dashboard showing Meta Ads performance with line graphs, donut charts, and key metrics in cyan and magenta." style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuBSN0wriItECk0AOM-I8C5F_wi0-jWcdhkNb3toX8NOYeaH4dSfgfUDpJ56GD3ENGD8-ImSZz_TosTpG57rTkXMhwp6GpClykcjW4_bn9ckJ8mnx11ZrteE_YqhSnTlOE6qreGz9kQwZMj5YIp011FLhrpbBmwKaTEA3w4qKNBXHg4IWjwjOh8fimmvkWVTZfi7PF3mwER3J1vVg5gzRnphw4-4pZfJ4YpvKe8f2rfasr022Fjd4u3IQwjzNeArqFsF9ht6LFzB4HT6')"></div>
+</div>
+<div class="p-4 flex flex-col flex-grow">
+<h3 class="font-headline-md text-on-surface mb-2">Meta Ads Analyzer</h3>
+<p class="font-body-md text-on-surface-variant mb-6 flex-grow">Analisis performa iklan Meta Ads dengan AI.</p>
+<div class="flex flex-wrap gap-2 mt-auto">
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">Meta</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">React</span>
+<span class="px-3 py-1 glass-panel rounded-full font-label-mono text-label-mono text-surface-tint text-[10px]">AI</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Project Detail Showcase -->
+<section class="py-stack-lg px-margin-mobile relative bg-surface-container-lowest/50 border-y border-white/5">
+<div class="max-w-container-max mx-auto">
+<div class="glass-panel rounded-xl p-6 md:p-8 flex flex-col md:flex-row gap-8 items-center">
+<div class="w-full md:w-1/2">
+<img class="w-full h-auto rounded-lg shadow-[0_0_50px_rgba(0,219,231,0.2)]" data-alt="A futuristic dark mode dashboard interface on a laptop next to a mobile version on a phone, with a glowing vertical light beam separating them." src="https://lh3.googleusercontent.com/aida-public/AB6AXuCy8g4YMK4XK2GpAzzubklGclb1fT634UrnxSD34WE3rXTh-p7JB8AQvgVR5mlqGsBVYFzKVKZ_L9L4zllO6bcBjY6zOY6A-6v72qKUKPA-_txbsAWqBJ_a-SjfJ3IdQUAyew2t8_pGeBuIr2kDY23ZHoQ_zCVrDwA5jEyv5O93PXo-qaa0sAVtYuAtd0TK8_1LVcPG6fb1mvzKzBICMl71CRL4QuF05P2o10FtEGV3KwSOv2jao-quNT-8maybl63awXbnNRBLrnlN"/>
+</div>
+<div class="w-full md:w-1/2 space-y-6">
+<h3 class="font-display-lg-mobile text-on-surface">Data Visualization Platform</h3>
+<div class="space-y-4">
+<div>
+<h4 class="font-label-mono text-surface-tint mb-1 uppercase tracking-wider">Problem</h4>
+<p class="font-body-md text-on-surface-variant">Complex data streams were unmanageable for non-technical users.</p>
+</div>
+<div>
+<h4 class="font-label-mono text-secondary-fixed mb-1 uppercase tracking-wider">Solution</h4>
+<p class="font-body-md text-on-surface-variant">Developed an AI-driven dashboard that auto-generates insights and intuitive charts.</p>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Skills Section -->
+<section class="py-stack-lg px-margin-mobile relative" id="skills">
+<div class="max-w-container-max mx-auto text-center space-y-stack-md">
+<div class="space-y-4">
+<h2 class="font-display-lg text-gradient">Skills &amp; Experience</h2>
+<p class="font-body-lg text-on-surface-variant">AI &amp; Automation Developer</p>
+</div>
+<div class="grid grid-cols-1 md:grid-cols-3 gap-gutter">
+<!-- Skill 1 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-8 flex flex-col items-center justify-center text-center group">
+<span class="material-symbols-outlined text-[64px] text-surface-tint mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(0,219,231,0.5)]">psychology</span>
+<h3 class="font-headline-md text-on-surface mb-2">AI Engineering</h3>
+<p class="font-body-md text-on-surface-variant">Machine Learning, NLP, Computer Vision</p>
+</div>
+<!-- Skill 2 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-8 flex flex-col items-center justify-center text-center group">
+<span class="material-symbols-outlined text-[64px] text-secondary-fixed mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(233,221,255,0.5)]">code_blocks</span>
+<h3 class="font-headline-md text-on-surface mb-2">Development</h3>
+<p class="font-body-md text-on-surface-variant">Python, Node.js, React, React Native</p>
+</div>
+<!-- Skill 3 -->
+<div class="glass-panel glass-panel-hover rounded-xl p-8 flex flex-col items-center justify-center text-center group">
+<span class="material-symbols-outlined text-[64px] text-surface-tint mb-4 group-hover:scale-110 transition-transform duration-300 drop-shadow-[0_0_15px_rgba(0,219,231,0.5)]">settings_suggest</span>
+<h3 class="font-headline-md text-on-surface mb-2">Automation</h3>
+<p class="font-body-md text-on-surface-variant">n8n, Zapier, UIPath, Airflow</p>
+</div>
+</div>
+</div>
+</section>
+<!-- Experience Timeline -->
+<section class="py-stack-lg px-margin-mobile relative overflow-hidden" id="experience">
+<div class="max-w-container-max mx-auto text-center relative z-10">
+<h3 class="font-headline-md text-on-surface mb-stack-md uppercase tracking-widest text-surface-tint">Build, Automate, Deploy, Scale</h3>
+<div class="relative max-w-3xl mx-auto h-64 flex items-center justify-center">
+<!-- Decorative glowing line representing scale -->
+<div class="absolute w-1 h-full bg-gradient-to-b from-surface-tint via-secondary-fixed to-transparent opacity-50"></div>
+<div class="absolute w-full h-1 bg-gradient-to-r from-transparent via-surface-tint to-transparent opacity-30"></div>
+<span class="material-symbols-outlined text-[48px] text-on-surface absolute z-20 animate-pulse bg-surface-dim rounded-full p-2 border border-white/10 shadow-[0_0_30px_rgba(0,219,231,0.5)]">electric_bolt</span>
+</div>
+</div>
+</section>
+<!-- Contact CTA -->
+<section class="py-stack-lg px-margin-mobile relative" id="contact">
+<div class="max-w-container-max mx-auto text-center space-y-8">
+<button class="glass-panel border-surface-tint/50 px-12 py-6 rounded-2xl hover:border-surface-tint transition-all duration-500 hover:shadow-[0_0_50px_rgba(0,219,231,0.2)] group">
+<span class="font-display-lg-mobile text-on-surface group-hover:text-white transition-colors">
+                    LET'S BUILD SOMETHING <span class="text-surface-tint">AMAZING</span>
+</span>
+</button>
+<div class="flex justify-center gap-6 pt-4">
+<a class="text-on-surface-variant hover:text-surface-tint transition-colors" href="#"><span class="material-symbols-outlined text-[32px]">open_in_new</span></a>
+<a class="text-on-surface-variant hover:text-surface-tint transition-colors" href="#"><span class="material-symbols-outlined text-[32px]">code</span></a>
+<a class="text-on-surface-variant hover:text-surface-tint transition-colors" href="#"><span class="material-symbols-outlined text-[32px]">mail</span></a>
+</div>
+</div>
+</section>
+<!-- Footer -->
+<footer class="w-full py-stack-md mt-stack-lg border-t border-outline-variant/30 bg-surface-dim flat">
+<div class="max-w-container-max mx-auto px-margin-mobile flex flex-col md:flex-row justify-between items-center gap-stack-sm">
+<span class="font-label-mono text-label-mono text-primary">© 2024 NEURAL_CORE. ENGINEERED FOR THE FUTURE.</span>
+<div class="flex gap-4">
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">GITHUB</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">LABS</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">X</a>
+<a class="font-label-mono text-label-mono text-on-surface-variant hover:text-primary-fixed transition-colors" href="#">SIGNAL</a>
+</div>
+</div>
+</footer>
+</body></html>
