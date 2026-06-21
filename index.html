@@ -3,6 +3,7 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<script>if(history.scrollRestoration)history.scrollRestoration='manual';window.scrollTo(0,0);</script>
 <title>MYCAL — AI Engineer & Automation Developer</title>
 <meta name="description" content="MYCAL — Senior AI Engineer and Automation Developer. I build intelligent automation systems, AI agents, and full-stack applications that scale."/>
 <meta name="keywords" content="AI Engineer, Automation Developer, Full Stack Developer, n8n, OpenAI, React, Node.js, Python, AI Agent, Machine Learning, WhatsApp Automation"/>
@@ -630,14 +631,8 @@ const pts=new THREE.Points(geo,mat);scene.add(pts);
 // smoothstep easing
 const ss=t=>{const c=Math.max(0,Math.min(1,t));return c*c*(3-2*c);}
 
-// scroll → morph
-const morphTarget={v:0},morphCurrent={v:0},prevSmooth={v:-1};
-window.addEventListener('scroll',()=>{
-  const hero=document.getElementById('home');
-  if(!hero)return;
-  const scrollable=Math.max(1,hero.offsetHeight-window.innerHeight);
-  morphTarget.v=Math.max(0,Math.min(1,window.scrollY/scrollable));
-},{passive:true});
+const morphCurrent={v:0},prevSmooth={v:-1};
+const hero=document.getElementById('home');
 
 const mouse={x:0,y:0},sm={x:0,y:0};
 window.addEventListener('mousemove',e=>{mouse.x=(e.clientX/W()-0.5)*2;mouse.y=-(e.clientY/H()-0.5)*2},{passive:true});
@@ -645,7 +640,10 @@ let base=0;
 
 (function tick(){
   requestAnimationFrame(tick);
-  morphCurrent.v+=(morphTarget.v-morphCurrent.v)*0.06;
+  // read scroll directly every frame — no reliance on scroll events
+  const scrollable=hero?Math.max(1,hero.offsetHeight-window.innerHeight):1;
+  const morphTarget=hero?Math.max(0,Math.min(1,window.scrollY/scrollable)):0;
+  morphCurrent.v+=(morphTarget-morphCurrent.v)*0.06;
   const smooth=ss(morphCurrent.v);
 
   if(Math.abs(smooth-prevSmooth.v)>0.0002){
