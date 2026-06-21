@@ -18,7 +18,7 @@
 tailwind.config={darkMode:'class',theme:{extend:{colors:{'c':'#00dbe7','cv':'#d0bcff'},fontFamily:{display:['Sora','sans-serif'],body:['Geist','sans-serif'],mono:['JetBrains Mono','monospace']}}}}
 </script>
 <style>
-*{box-sizing:border-box}html{scroll-behavior:smooth}
+*{box-sizing:border-box}
 body{background:#020202;color:#e5e2e1;font-family:'Geist',sans-serif;overflow-x:hidden}
 ::-webkit-scrollbar{width:3px}::-webkit-scrollbar-track{background:#020202}::-webkit-scrollbar-thumb{background:#353434;border-radius:10px}::-webkit-scrollbar-thumb:hover{background:#00dbe7}
 .grid-bg{background-image:linear-gradient(rgba(0,219,231,0.025) 1px,transparent 1px),linear-gradient(90deg,rgba(0,219,231,0.025) 1px,transparent 1px);background-size:80px 80px}
@@ -98,7 +98,7 @@ body{background:#020202;color:#e5e2e1;font-family:'Geist',sans-serif;overflow-x:
     <!-- Grid -->
     <div class="grid-bg" style="position:absolute;inset:0;opacity:0.3;z-index:3"></div>
 
-    <div class="max-w-4xl mx-auto px-5 w-full relative" style="z-index:10">
+    <div id="hero-content" class="max-w-4xl mx-auto px-5 w-full relative" style="z-index:10;transition:opacity 0.1s">
       <div class="flex flex-col justify-center min-h-[calc(100vh-120px)]">
         <div class="space-y-7 py-12">
           <div class="inline-flex items-center gap-2.5 glass rounded-full px-4 py-2 reveal">
@@ -565,9 +565,9 @@ document.querySelectorAll('a[href^="#"]').forEach(a=>{a.addEventListener('click'
 </script>
 <script type="module">
 import*as THREE from'/three.module.min.js';
-// Always start at the top so galaxy shows first, not MYCAL
 if(history.scrollRestoration)history.scrollRestoration='manual';
-window.scrollTo(0,0);
+window.scrollTo({top:0,behavior:'instant'});
+window.addEventListener('pageshow',()=>window.scrollTo({top:0,behavior:'instant'}));
 const c=document.getElementById('particles');
 if(!c)throw'no canvas';
 
@@ -633,6 +633,7 @@ const ss=t=>{const c=Math.max(0,Math.min(1,t));return c*c*(3-2*c);}
 
 const morphCurrent={v:0},prevSmooth={v:-1};
 const hero=document.getElementById('home');
+const heroContent=document.getElementById('hero-content');
 
 const mouse={x:0,y:0},sm={x:0,y:0};
 window.addEventListener('mousemove',e=>{mouse.x=(e.clientX/W()-0.5)*2;mouse.y=-(e.clientY/H()-0.5)*2},{passive:true});
@@ -643,6 +644,7 @@ let base=0;
   // read scroll directly every frame — no reliance on scroll events
   const scrollable=hero?Math.max(1,hero.offsetHeight-window.innerHeight):1;
   const morphTarget=hero?Math.max(0,Math.min(1,window.scrollY/scrollable)):0;
+  if(window.scrollY===0)morphCurrent.v=0; // hard reset at top — galaxy always shows at scroll=0
   morphCurrent.v+=(morphTarget-morphCurrent.v)*0.06;
   const smooth=ss(morphCurrent.v);
 
@@ -650,6 +652,8 @@ let base=0;
     for(let i=0;i<N*3;i++)livePos[i]=galaxyPos[i]+(textPos[i]-galaxyPos[i])*smooth;
     geo.attributes.position.needsUpdate=true;
     prevSmooth.v=smooth;
+    // fade hero content out as MYCAL forms so text doesn't cover particles
+    if(heroContent)heroContent.style.opacity=1-smooth;
   }
 
   base+=0.0005*(1-smooth*0.98);
